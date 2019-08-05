@@ -1,12 +1,8 @@
 import { connectRouter, RouterState } from "connected-react-router";
 import { combineReducers } from "redux";
 import homeReducer, { IHomeState } from "../routes/Home/modules/homeReducer";
-import issueReducer, {
-  IIssuesState
-} from "../routes/Issues/modules/issuesReducer";
-import projectReducer, {
-  IProjectsState
-} from "../routes/Projects/modules/projectReducer";
+import issueReducer, { IIssuesState } from "../routes/Issues/modules/issuesReducer";
+import projectReducer, { IProjectsState } from "../routes/Projects/modules/projectReducer";
 import { history } from "./createStore";
 
 // interface IStoreEnchancer {}

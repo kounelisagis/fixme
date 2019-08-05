@@ -13,26 +13,24 @@ import { customOutboundLink, customPageView } from "../../../helpers/helpers";
 import { issuesListMockData } from "../../../helpers/mockData";
 import "../../../styles/issues.css";
 import { IProject } from "../../Projects/modules/projectReducer";
-import Tag from "./icons/icon-tag.svg";
-import Time from "./icons/icon-time.svg";
+// import Tag from "./icons/icon-tag.svg";
 import BugFix from "./icons/icon-type-bugfix.svg";
 import Enhancement from "./icons/icon-type-feature.svg";
+import Time from "./icons/icon-time.svg";
 import Task from "./icons/icon-type-task.svg";
 import IssueFilter from "./IssueFilter";
 
 const icons = {
-  bugfix: BugFix,
-  bug: BugFix,
-  fix: BugFix,
-  enhancement: Enhancement
+  easy: BugFix,
+  unknown: Enhancement
 };
 
 export interface IParams {
-  experience_needed?: Array<string | number> | (string | number);
-  language?: Array<string | number> | (string | number);
-  type?: Array<string | number> | (string | number);
-  ordering?: string | number;
-  project_id?: Array<string | number> | (string | number);
+  technology?: string[] | string;
+  experienceNeeded?: string[] | string;
+  hoster?: string[] | string;
+  ordering?: string;
+  project_id?: string[] | string;
 }
 
 interface IIssuesProps {
@@ -48,21 +46,25 @@ interface IIssuesProps {
 }
 
 const getParamsFromProps = (props: IIssuesProps): IParams => {
-  const { experience_needed, type, language, ordering, project_id } = parse(
+  const { technology, experienceNeeded, hoster, project_id, ordering } = parse(
     props.search
   );
   return {
-    experience_needed: experience_needed
-      ? typeof experience_needed === "string"
-        ? [experience_needed]
-        : experience_needed
+    technology: technology
+      ? typeof technology === "string"
+        ? [technology]
+        : technology
       : undefined,
-    language: language
-      ? typeof language === "string"
-        ? [language]
-        : language
+    experienceNeeded: experienceNeeded
+      ? typeof experienceNeeded === "string"
+        ? [experienceNeeded]
+        : experienceNeeded
       : undefined,
-    type: type ? (typeof type === "string" ? [type] : type) : undefined,
+    hoster: hoster
+      ? typeof hoster === "string"
+        ? [hoster]
+        : hoster
+      : undefined,
     project_id: project_id
       ? typeof project_id === "string"
         ? [project_id]
@@ -153,7 +155,7 @@ export default class Issues extends React.PureComponent<
                     <IssueFilter
                       handleChange={this.handleChange}
                       options={(projects || []).map(project => ({
-                        label: project.display_name,
+                        label: project.name,
                         value: project.id as string
                       }))}
                       params={params}
@@ -184,10 +186,10 @@ export default class Issues extends React.PureComponent<
                     <option value="-1" disabled={true}>
                       Sort by...
                     </option>
-                    <option value="experience_needed">
+                    <option value="experienceNeeded">
                       Experience Needed Ascending
                     </option>
-                    <option value="-experience_needed">
+                    <option value="-experienceNeeded">
                       Experience Needed Descending
                     </option>{" "}
                   </select>
@@ -213,17 +215,14 @@ export default class Issues extends React.PureComponent<
                             }}
                           >
                             <div
-                              className={`col-9 issue-card-main ${issue.experience_needed ||
+                              className={`col-9 issue-card-main ${issue.experienceNeeded ||
                                 "moderate"}`}
                             >
                               <h5 className="issue-card-title">
                                 {issue.title}
                               </h5>
                               <p className="issue-card-subtitle mb-5">
-                                {
-                                  (issue.project || { display_name: "" })
-                                    .display_name
-                                }
+                                {issue.project.name}
                               </p>
 
                               <div className="issue-card-description">
@@ -237,17 +236,11 @@ export default class Issues extends React.PureComponent<
                               <div className="align-self-start d-flex flex-column">
                                 <div className="text-nowrap">
                                   <span
-                                    className={`circle ${issue.experience_needed ||
+                                    className={`circle ${issue.experienceNeeded ||
                                       "moderate"}`}
                                   />
                                   <span className="text-capitalize ml-1">
-                                    {issue.experience_needed || "Moderate"}
-                                  </span>
-                                </div>
-                                <div className="text-nowrap">
-                                  <img src={Tag} alt="" />
-                                  <span className="text-capitalize ml-1">
-                                    {issue.language}
+                                    {issue.experienceNeeded || "Moderate"}
                                   </span>
                                 </div>
                                 <div className="text-nowrap">
@@ -333,7 +326,7 @@ export default class Issues extends React.PureComponent<
     if ((params[filterType] || []).length <= 0) {
       delete params[filterType];
     }
-    const url = `${this.props.location}?${stringify(params as any)}`;
+    const url = `${this.props.location}?${stringify(params)}`;
     customPageView(url);
     this.props.push(url);
   };

@@ -2,15 +2,16 @@ import { Dispatch } from "redux";
 import { makeCall } from "../../../helpers/caller";
 
 export interface IProject {
-  id: string | number;
+  id: string;
   first_color: string;
   second_color: string;
-  display_name: string;
-  issues_count: number;
-  setup_duration: string;
-  tags: string[];
   logo: string;
+  name: string;
   description: string;
+  languages: string;
+  tags: string[];
+  issues_count: number;
+  is_github: boolean;
 }
 
 export interface IProjectsState {

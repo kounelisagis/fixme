@@ -14,23 +14,28 @@ export const technologies = [
 
 export const lvlOfDifficulty = [
   { value: "easy", label: "Easy" },
-  { value: "moderate", label: "Moderate" },
   { value: "*", label: "Not sure" }
 ];
 
-export const issueType = [
-  { value: "enhancement", label: "Enhancement" },
-  { value: "bugfix", label: "Bugfix" },
-  { value: "*", label: "Not sure" }
+export const hosters = [
+  { value: "github", label: "GitHub" },
+  { value: "gitlab", label: "GitLab" }
 ];
 
 export const filters = [
-  { label: "Technologies", value: "language", options: technologies },
+  {
+    label: "Technologies",
+    value: "technologies",
+    options: technologies
+  },
   {
     label: "Level of difficulty",
-    value: "experience_needed",
+    value: "experienceNeeded",
     options: lvlOfDifficulty
   },
-  { label: "Type", value: "type", options: issueType }
+  {
+    label: "Hoster",
+    value: "hoster",
+    options: hosters
+  }
 ];
-

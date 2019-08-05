@@ -5,9 +5,13 @@
     "exclude": ["config/**/*.js", "node_modules/**/*.ts", "dist/**"]
   },
   "rules": {
+    "ordered-imports": false,
     "object-literal-sort-keys": false
   },
   "jsRules": {
+    "ordered-imports": false,
     "object-literal-sort-keys": false
-  }
+  },
+    "rulesDirectory": []
+
 }

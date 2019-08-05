@@ -6,20 +6,20 @@ import Select from 'react-select';
 import scrollIntoView from 'scroll-into-view-if-needed';
 import smoothScrollIntoView from 'smooth-scroll-into-view-if-needed';
 
-import { issueType, lvlOfDifficulty, technologies } from '../../../helpers/consts';
+import { hosters, lvlOfDifficulty, technologies } from '../../../helpers/consts';
 import { IRootState } from '../../../store/reducers';
 import { countIssues } from '../../Issues/modules/issuesReducer';
-import { updateLanguage, updateLevel, updateType } from '../modules/homeReducer';
+import { updateTechnology, updateExperience, updateHoster } from '../modules/homeReducer';
 import { customStyles } from './customStyles';
 
 interface ITellUsAboutYou {
-  readonly updateLanguage: (language: string[]) => any;
-  readonly updateLevel: (level: string) => any;
-  readonly updateType: (type: string) => any;
+  readonly updateTechnology: (language: string) => any;
+  readonly updateExperience: (experience?: string) => any;
+  readonly updateHoster: (hoster?: string) => any;
   readonly countIssues: (args: any) => any;
-  readonly language: string[];
-  readonly type: string;
-  readonly experience_needed: string;
+  readonly technology: string;
+  readonly experienceNeeded: string;
+  readonly hoster: string;
   readonly issuesLength: number;
   readonly home: any;
   readonly focus: boolean;
@@ -58,7 +58,7 @@ class TellUsAboutYou extends React.Component<ITellUsAboutYou, {}> {
   public componentDidUpdate(prevProps: ITellUsAboutYou): void {
     if (
       prevProps.home !== this.props.home &&
-      (this.props.language || []).length > 0
+      (this.props.technology || []).length > 0
     ) {
       this.props.countIssues(this.props.home);
     }
@@ -77,27 +77,24 @@ class TellUsAboutYou extends React.Component<ITellUsAboutYou, {}> {
     }
   }
 
-  public handleLanguageChange = (
-    values: Array<{ value: string; label: string }>
-  ) => {
-    this.props.updateLanguage(values.map(value => value.value));
-    if (values.length <= 0) {
-      this.props.updateLevel("");
-      this.props.updateType("");
-    }
-  };
-  public handleTypeChange = (value: { value: string; label: string }) => {
-    this.props.updateType(value.value);
+
+  public handleLanguageChange = (value: { value: string; label: string }) => {
+    this.props.updateTechnology(value.value);
+    this.props.updateExperience("");
+    this.props.updateHoster("");
   };
   public handleLvlChange = (value: { value: string; label: string }) => {
-    this.props.updateLevel(value.value);
+    this.props.updateExperience(value.value);
+  };
+  public handleTypeChange = (value: { value: string; label: string }) => {
+    this.props.updateHoster(value.value);
   };
   public render() {
     const {
-      language,
-      type,
+      technology,
+      experienceNeeded,
+      hoster,
       issuesLength,
-      experience_needed,
       home
     } = this.props;
 
@@ -119,15 +116,15 @@ class TellUsAboutYou extends React.Component<ITellUsAboutYou, {}> {
               isMulti={true}
               placeholder="type in your favorite languages"
               defaultValue={
-                language &&
-                technologies.filter(tech => language.includes(tech.value))
+                technology &&
+                technologies.filter(tech => technology.includes(tech.value))
               }
               styles={customStyles(false)}
               onChange={this.handleLanguageChange}
             />
           </div>
           <br />
-          {(this.props.language || []).length > 0 && (
+          {(this.props.technology || []).length > 0 && (
             <div>
               <p className="h2">and I’m looking for issues that are</p>
               <div className="d-inline-block">
@@ -135,17 +132,17 @@ class TellUsAboutYou extends React.Component<ITellUsAboutYou, {}> {
                   options={lvlOfDifficulty}
                   defaultValue={lvlOfDifficulty.find(
                     lvl =>
-                      !!experience_needed &&
-                      experience_needed.includes(lvl.value)
+                      !!experienceNeeded &&
+                      experienceNeeded.includes(lvl.value)
                   )}
                   styles={customStyles(true)}
                   onChange={this.handleLvlChange}
                 />
                 <span className="h2">&</span>
                 <Select
-                  options={issueType}
-                  defaultValue={issueType.find(
-                    issue => !!type && type.includes(issue.value)
+                  options={hosters}
+                  defaultValue={hosters.find(
+                    hstr => !!hoster && hoster.includes(hstr.value)
                   )}
                   styles={customStyles(true)}
                   onChange={this.handleTypeChange}
@@ -162,19 +159,19 @@ class TellUsAboutYou extends React.Component<ITellUsAboutYou, {}> {
 
 const mapStateToProps = (state: IRootState) => {
   return {
-    language: state.home.language,
-    type: state.home.type,
-    experience_needed: state.home.experience_needed,
+    technology: state.home.technology,
+    hoster: state.home.hoster,
+    experienceNeeded: state.home.experienceNeeded,
     issuesLength: state.issues.issuesLength,
     home: state.home
   };
 };
 
 const mapDispatchToProps = {
-  updateLanguage,
-  updateType,
+  updateTechnology,
+  updateHoster,
   countIssues,
-  updateLevel
+  updateExperience
 };
 
 export default connect(

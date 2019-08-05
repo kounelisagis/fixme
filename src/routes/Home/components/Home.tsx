@@ -9,30 +9,30 @@ import GroupCopy from "./assets/group-copy@2x.png";
 import LoudSpeaker from "./assets/icon-loudspeaker.svg"
 import Illustration from "./assets/illustration.png";
 import TellUsAboutYou from "./TellUsAboutYou";
+
 interface IHomeProps {
   readonly getProjects: () => any;
   readonly projectLength: number;
-   readonly updateLanguage: (language: string[]) => any;
-  readonly updateLevel: (level?:string) => any;
-  readonly updateType: (type?: string) => any;
-
+  readonly updateTechnology: (technology: string) => any;
+  readonly updateExperience: (experience?: string) => any;
+  readonly updateHoster: (hoster?:string) => any;
 }
+
 export default class Home extends React.PureComponent<IHomeProps,{
   readonly focusSelect: boolean;
 }>{
 
-  public  readonly state = { focusSelect: false }
+  public readonly state = { focusSelect: false }
 
   public componentDidMount(): void {
     this.props.getProjects()
     customPageView(window.location.pathname + window.location.search);
-
   }
 
   public componentWillUnmount() {
-    this.props.updateLanguage([]);
-    this.props.updateLevel();
-    this.props.updateType();
+    this.props.updateTechnology("");
+    this.props.updateExperience();
+    this.props.updateHoster();
   }
 
 public handleClick = () => {

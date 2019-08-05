@@ -8,9 +8,8 @@ export const IssueList = (props: any) => (
     <Datagrid>
       <TextField source="id" />
       <TextField source="title" />
-      <TextField source="experience_needed" />
+      <TextField source="experienceNeeded" />
       <TextField source="expected_time" />
-      <TextField source="language" />
       <TextField source="tech_stack" />
       <TextField source="url" />
       <TextField source="body" />
@@ -22,14 +21,7 @@ export const IssueList = (props: any) => (
         source="project_id"
         reference="admin/projects"
       >
-        <TextField source="display_name" />
-      </ReferenceField>
-      <ReferenceField
-        label="Repository"
-        source="repository_id"
-        reference="admin/repositories"
-      >
-        <TextField source="repository_url" />
+        <TextField source="name" />
       </ReferenceField>
       <TextField source="github_id" />
     </Datagrid>

@@ -1,7 +1,7 @@
 import React from "react";
 import { IParams } from "./Issues";
 
-interface IIssueCardProps {
+interface IssueCardProps {
   options: Array<{ value: string; label: string }>;
   handleChange: (checked: boolean, value: string, filterType: string) => any;
   params: IParams;
@@ -9,7 +9,7 @@ interface IIssueCardProps {
   defaultValue: string;
 }
 
-const IssueFilter: React.SFC<IIssueCardProps> = ({
+const IssueFilter: React.SFC<IssueCardProps> = ({
   options,
   handleChange,
   params,

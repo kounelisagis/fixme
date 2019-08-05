@@ -7,7 +7,6 @@ import authProvider from '../helpers/authProvider';
 import dataProvider from '../helpers/dataProvider';
 import { IssueList } from './Issues';
 import { ProjectCreate, ProjectEdit, ProjectList } from './Projects';
-import { RepositoryCreate, RepositoryEdit, RepositoryList } from './Repositories';
 import { UserCreate, UserEdit, UserList } from './Users';
 
 export default class AdminComponent extends React.PureComponent<{}, {}> {
@@ -20,12 +19,6 @@ export default class AdminComponent extends React.PureComponent<{}, {}> {
             list={ProjectList}
             edit={ProjectEdit}
             create={ProjectCreate}
-          />
-          <Resource
-            name="admin/repositories"
-            list={RepositoryList}
-            edit={RepositoryEdit}
-            create={RepositoryCreate}
           />
           <Resource name="admin/issues" list={IssueList} />
           <Resource

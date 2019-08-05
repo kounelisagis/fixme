@@ -1,70 +1,54 @@
 import { createAction } from "typesafe-actions";
 
 export interface IHomeState {
-  readonly language: string[];
-  readonly type: string;
-  readonly experience_needed: string;
+  readonly technology: string;
+  readonly experienceNeeded: string;
+  readonly hoster: string;
 }
 
 // ------------------------------------
 // Actions
 // ------------------------------------
 export enum HomeActions {
-  UPDATE_LANGUAGE = "UPDATE_LANGUAGE",
-  UPDATE_TYPE = "UPDATE_TYPE",
-  UPDATE_LEVEL = "UPDATE_LEVEL"
+  UPDATE_TECHNOLOGY = "UPDATE_TECHNOLOGY",
+  UPDATE_EXPERIENCE = "UPDATE_EXPERIENCE",
+  UPDATE_HOSTER = "UPDATE_HOSTER"
 }
 
 // --------------------------------------------------
 // Map actions and their payload to type consts
 // --------------------------------------------------
-export const updateLanguage = createAction(
-  HomeActions.UPDATE_LANGUAGE,
-  resolve => (languages: string[]) => resolve(languages)
+export const updateTechnology = createAction(
+  HomeActions.UPDATE_TECHNOLOGY,
+  resolve => (technology: string) => resolve(technology)
 );
-export const updateType = createAction(
-  HomeActions.UPDATE_TYPE,
-  resolve => (type?: string) => resolve(type)
+export const updateExperience = createAction(
+  HomeActions.UPDATE_EXPERIENCE,
+  resolve => (experienceNeeded?: string) => resolve(experienceNeeded)
 );
-export const updateLevel = createAction(
-  HomeActions.UPDATE_LEVEL,
-  resolve => (level?: string) => resolve(level)
+export const updateHoster = createAction(
+  HomeActions.UPDATE_HOSTER,
+  resolve => (hoster?: string) => resolve(hoster)
 );
-// const appendToProjects = createAction(
-//   HomeActions.PROJECTS_DATA,
-//   resolve => (data, existingProjects) => {
-//     data.projects.unshift(...existingProjects);
-//     return resolve(data);
-//   }
-// );
-
-// const somethingWentWrong = createAction(
-//   HomeActions.DASHBOARD_LISTING_ERROR,
-//   resolve => (data: any) => {
-//     // tslint:disable-next-line:no-console
-//     console.error(data);
-//     return resolve();
-//   }
-// );
 
 export const actions = {
-  updateLanguage
+  updateTechnology
 };
 // --------------------------------------------------
 // Action Handlers
 // --------------------------------------------------
 export const ACTION_HANDLERS = {
-  [HomeActions.UPDATE_LANGUAGE]: (state: IHomeState, { payload }: any) => ({
+  [HomeActions.UPDATE_TECHNOLOGY]: (state: IHomeState, { payload }: any) => ({
     ...state,
-    language: payload
+    technology: payload
   }),
-  [HomeActions.UPDATE_TYPE]: (state: IHomeState, { payload }: any) => ({
+  [HomeActions.UPDATE_EXPERIENCE]: (state: IHomeState, { payload }: any) => ({
     ...state,
-    type: payload ? [payload] : undefined
+    experienceNeeded: payload ? [payload] : undefined
   }),
-  [HomeActions.UPDATE_LEVEL]: (state: IHomeState, { payload }: any) => ({
+  [HomeActions.UPDATE_HOSTER]: (state: IHomeState, { payload }: any) => ({
     ...state,
-    experience_needed: payload ? [payload] : undefined
+    hoster: payload ? [payload] : undefined
   })
 };
 // --------------------------------------------------
@@ -72,6 +56,6 @@ export const ACTION_HANDLERS = {
 // --------------------------------------------------
 const initialState: Partial<IHomeState> = {};
 export default function homeReducer(state = initialState, action: any) {
-  const handler = ACTION_HANDLERS[action.type];
+  const handler = ACTION_HANDLERS[action.technology];
   return handler ? handler(state, action) : state;
 }

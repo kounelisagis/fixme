@@ -1,6 +1,6 @@
 // import Raven from "raven-js";
 import { routerMiddleware } from "connected-react-router";
-import { createBrowserHistory } from "history";
+import { createBrowserHistory } from 'history';
 import { applyMiddleware, compose, createStore } from "redux";
 import thunk from "redux-thunk";
 import reducerRegistry from "./reducers";

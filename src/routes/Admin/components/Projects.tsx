@@ -26,15 +26,16 @@ export const ProjectList = (props: any) => (
   <List {...props}>
     <Datagrid>
       <TextField source="id" />
-      <TextField source="display_name" label="Project Name" />
+      <TextField source="name" label="Project Name" />
       <TextField source="first_color" />
       <TextField source="second_color" />
-      <TextField source="display_name" />
+      <TextField source="name" />
       <NumberField source="issues_count" />
       <TextField source="setup_duration" />
       <TextField source="logo" label="Logo url (*.png, *.jpg etc)" />
       <TextField source="description" label=" Short project description" />
       <TagsField label="Tags" source="tags" />
+      <TagsField label="Languages" source="languages" />
       <TextField source="link" label="Link to GitHub repo" />
       <EditButton />
     </Datagrid>
@@ -42,14 +43,14 @@ export const ProjectList = (props: any) => (
 );
 
 const ProjectTitle = ({ record }: any) => {
-  return <span>Post {record ? `"${record.display_name}"` : ""}</span>;
+  return <span>Post {record ? `"${record.name}"` : ""}</span>;
 };
 
 export const ProjectEdit = (props: any) => (
   <Edit title={<ProjectTitle />} {...props}>
     <SimpleForm>
       <DisabledInput source="id" />
-      <TextInput source="display_name" label="Project Name" />
+      <TextInput source="name" label="Project Name" />
       <TextInput source="first_color" />
       <TextInput source="second_color" />
       <NumberInput source="issues_count" />
@@ -64,7 +65,7 @@ export const ProjectEdit = (props: any) => (
 export const ProjectCreate = (props: any) => (
   <Create {...props}>
     <SimpleForm>
-      <TextInput source="display_name" label="Project Name" />
+      <TextInput source="name" label="Project Name" />
       <TextInput source="first_color" />
       <TextInput source="second_color" />
       <NumberInput source="issues_count" />

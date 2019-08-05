@@ -2,17 +2,15 @@ import { connect } from "react-redux";
 import { IRootState } from "../../../store/reducers";
 import { getProjects } from "../../Projects/modules/projectReducer";
 import Home from "../components/Home";
-import {
-  updateLanguage,
-  updateLevel,
-  updateType
-} from "../modules/homeReducer";
+import { updateTechnology, updateExperience, updateHoster} from "../modules/homeReducer";
+
 const mapDispatchToProps = {
   getProjects,
-  updateLanguage,
-  updateType,
-  updateLevel
+  updateTechnology,
+  updateExperience,
+  updateHoster
 };
+
 const mapStateToProps = (state: IRootState) => ({
   projectLength: state.projects.projectLength
 });

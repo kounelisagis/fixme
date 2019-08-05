@@ -53,12 +53,13 @@ export default class Projects extends React.PureComponent<IProjectProps, {}> {
                 id,
                 first_color,
                 second_color,
-                display_name,
+                name,
                 issues_count,
-                setup_duration,
                 tags,
                 logo,
-                description
+                description,
+                languages,
+                is_github
               }) => (
                 <div className="col-12 col-md-6 col-lg-4" key={id}>
                   <Link to={`issues?project_id=${id}`}>
@@ -68,7 +69,7 @@ export default class Projects extends React.PureComponent<IProjectProps, {}> {
                     >
                       <div className="d-flex justify-content-between projects-tile-top-wrapper">
                         <div className="projects-tile-top-title">
-                          {display_name}
+                          {name} {is_github === true ? " - GitHub" : " - GitLab"}
                         </div>
                         <div className="projects-tile-top-issues">
                           <span>
@@ -76,9 +77,9 @@ export default class Projects extends React.PureComponent<IProjectProps, {}> {
                             {issues_count === 1 ? "issue" : "issues"}
                           </span>
                           <br />
-                          {setup_duration && (
+                          {languages && (
                             <span className="small">
-                              {setup_duration} setup
+                              {languages}
                             </span>
                           )}
                         </div>
