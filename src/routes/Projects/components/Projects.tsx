@@ -55,10 +55,11 @@ export default class Projects extends React.PureComponent<IProjectProps, {}> {
                 second_color,
                 name,
                 issues_count,
-                tags,
                 logo,
+                setup_duration,
                 description,
                 languages,
+                tags,
                 is_github
               }) => (
                 <div className="col-12 col-md-6 col-lg-4" key={id}>
@@ -77,15 +78,28 @@ export default class Projects extends React.PureComponent<IProjectProps, {}> {
                             {issues_count === 1 ? "issue" : "issues"}
                           </span>
                           <br />
-                          {languages && (
+                          {setup_duration && (
                             <span className="small">
-                              {languages}
+                              {setup_duration}
                             </span>
                           )}
                         </div>
                       </div>
                       <div className="d-flex justify-content-between align-items-end projects-tile-bottom-wrapper">
                         <div className="projects-tile-tag-wrapper pb-2 ml-2">
+                          {(languages || []).map(language => {
+                            if (language !== "") {
+                              return (
+                                <span
+                                  className="projects-tile-tag mr-1"
+                                  key={language}
+                                >
+                                  {language}
+                                </span>
+                              );
+                            }
+                            return null;
+                          })}
                           {(tags || []).map(tag => {
                             if (tag !== "") {
                               return (

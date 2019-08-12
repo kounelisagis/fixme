@@ -16,7 +16,6 @@ import { IProject } from "../../Projects/modules/projectReducer";
 // import Tag from "./icons/icon-tag.svg";
 import BugFix from "./icons/icon-type-bugfix.svg";
 import Enhancement from "./icons/icon-type-feature.svg";
-import Time from "./icons/icon-time.svg";
 import Task from "./icons/icon-type-task.svg";
 import IssueFilter from "./IssueFilter";
 
@@ -27,8 +26,8 @@ const icons = {
 
 export interface IParams {
   technology?: string[] | string;
-  experienceNeeded?: string[] | string;
-  hoster?: string[] | string;
+  experience_needed?: string[] | string;
+  is_github?: string[] | string;
   ordering?: string;
   project_id?: string[] | string;
 }
@@ -46,7 +45,7 @@ interface IIssuesProps {
 }
 
 const getParamsFromProps = (props: IIssuesProps): IParams => {
-  const { technology, experienceNeeded, hoster, project_id, ordering } = parse(
+  const { technology, experience_needed, is_github, project_id, ordering } = parse(
     props.search
   );
   return {
@@ -55,15 +54,15 @@ const getParamsFromProps = (props: IIssuesProps): IParams => {
         ? [technology]
         : technology
       : undefined,
-    experienceNeeded: experienceNeeded
-      ? typeof experienceNeeded === "string"
-        ? [experienceNeeded]
-        : experienceNeeded
+    experience_needed: experience_needed
+      ? typeof experience_needed === "string"
+        ? [experience_needed]
+        : experience_needed
       : undefined,
-    hoster: hoster
-      ? typeof hoster === "string"
-        ? [hoster]
-        : hoster
+    is_github: is_github
+      ? typeof is_github === "string"
+        ? [is_github]
+        : is_github
       : undefined,
     project_id: project_id
       ? typeof project_id === "string"
@@ -172,29 +171,6 @@ export default class Issues extends React.PureComponent<
                   Showing {(page - 1) * 20}-{Math.min(page * 20, issuesLength)}{" "}
                   of {issuesLength} {issuesLength === 1 ? "issue" : "issues"}
                 </h2>
-                {/*
-                <div className="justify-content-center col-12 col-md-6">
-                  <select
-                    className="issue-ordering-by"
-                    value={params.ordering || "-1"}
-                    onChange={e => {
-                      // tslint:disable-next-line:jsx-no-lambda
-                      const ordering = e.target.value;
-                      this.handleChange(true, ordering, "ordering");
-                    }}
-                  >
-                    <option value="-1" disabled={true}>
-                      Sort by...
-                    </option>
-                    <option value="experienceNeeded">
-                      Experience Needed Ascending
-                    </option>
-                    <option value="-experienceNeeded">
-                      Experience Needed Descending
-                    </option>{" "}
-                  </select>
-                </div>
-                */}
               </div>
 
               {status === "loading" ? (
@@ -215,7 +191,7 @@ export default class Issues extends React.PureComponent<
                             }}
                           >
                             <div
-                              className={`col-9 issue-card-main ${issue.experienceNeeded ||
+                              className={`col-9 issue-card-main ${issue.experience_needed ||
                                 "moderate"}`}
                             >
                               <h5 className="issue-card-title">
@@ -235,35 +211,46 @@ export default class Issues extends React.PureComponent<
                               </span>
                               <div className="align-self-start d-flex flex-column">
                                 <div className="text-nowrap">
-                                  <span
-                                    className={`circle ${issue.experienceNeeded ||
-                                      "moderate"}`}
-                                  />
-                                  <span className="text-capitalize ml-1">
-                                    {issue.experienceNeeded || "Moderate"}
-                                  </span>
-                                </div>
-                                <div className="text-nowrap">
                                   <img
                                     src={
-                                      icons[(issue.type || "").toLowerCase()] ||
+                                      icons[(issue.experience_needed || "").toLowerCase()] ||
                                       Task
                                     }
                                     alt=""
                                   />
                                   <span className="text-capitalize ml-1">
-                                    {issue.type || "Issue"}
+                                    {issue.experience_needed || "Unknown"}
                                   </span>
                                 </div>
-                                {issue.expected_time && (
-                                  <div className="text-nowrap">
-                                    <img src={Time} alt="" />
+                                <div className="text-nowrap">
+                                  {(issue.project.languages || []).map(language => {
+                                    if (language !== "") {
+                                      return (
+                                        <span
+                                          className="text-capitalize ml-1"
+                                          key={language}
+                                        >
+                                          {language}
+                                        </span>
+                                      );
+                                    }
+                                    return null;
+                                  })}
+                                  {(issue.project.tags || []).map(tag => {
+                                    if (tag !== "") {
+                                      return (
+                                        <span
+                                          className="text-capitalize ml-1"
+                                          key={tag}
+                                        >
+                                          {tag}
+                                        </span>
+                                      );
+                                    }
+                                    return null;
+                                  })}
 
-                                    <span className="ml-1">
-                                      {issue.expected_time}
-                                    </span>
-                                  </div>
-                                )}
+                                </div>
                               </div>
                             </div>
                           </div>

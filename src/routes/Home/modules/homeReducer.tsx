@@ -2,7 +2,7 @@ import { createAction } from "typesafe-actions";
 
 export interface IHomeState {
   readonly technology: string;
-  readonly experienceNeeded: string;
+  readonly experience_needed: string;
   readonly hoster: string;
 }
 
@@ -24,7 +24,7 @@ export const updateTechnology = createAction(
 );
 export const updateExperience = createAction(
   HomeActions.UPDATE_EXPERIENCE,
-  resolve => (experienceNeeded?: string) => resolve(experienceNeeded)
+  resolve => (experience_needed?: string) => resolve(experience_needed)
 );
 export const updateHoster = createAction(
   HomeActions.UPDATE_HOSTER,
@@ -44,7 +44,7 @@ export const ACTION_HANDLERS = {
   }),
   [HomeActions.UPDATE_EXPERIENCE]: (state: IHomeState, { payload }: any) => ({
     ...state,
-    experienceNeeded: payload ? [payload] : undefined
+    experience_needed: payload ? [payload] : undefined
   }),
   [HomeActions.UPDATE_HOSTER]: (state: IHomeState, { payload }: any) => ({
     ...state,

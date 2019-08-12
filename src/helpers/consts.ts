@@ -1,41 +1,41 @@
 export const technologies = [
-  { value: "c", label: "C" },
-  { value: "c++", label: "C++" },
-  { value: "cuda", label: "CUDA" },
-  { value: "go", label: "Go" },
-  { value: "html", label: "HTML" },
-  { value: "java", label: "Java" },
-  { value: "javascript", label: "JavaScript" },
-  { value: "python", label: "Python" },
-  { value: "rust", label: "Rust" },
-  { value: "sass", label: "Sass" },
-  { value: "typescript", label: "TypeScript" }
+  { value: "C", label: "C" },
+  { value: "C++", label: "C++" },
+  { value: "CUDA", label: "CUDA" },
+  { value: "Go", label: "Go" },
+  { value: "HTML", label: "HTML" },
+  { value: "Java", label: "Java" },
+  { value: "JavaScript", label: "JavaScript" },
+  { value: "Python", label: "Python" },
+  { value: "Rust", label: "Rust" },
+  { value: "Sass", label: "Sass" },
+  { value: "TypeScript", label: "TypeScript" }
 ];
 
 export const lvlOfDifficulty = [
   { value: "easy", label: "Easy" },
-  { value: "*", label: "Not sure" }
+  { value: "unknown", label: "Not sure" }
 ];
 
 export const hosters = [
-  { value: "github", label: "GitHub" },
-  { value: "gitlab", label: "GitLab" }
+  { value: "true", label: "GitHub" },
+  { value: "false", label: "GitLab" }
 ];
 
 export const filters = [
   {
-    label: "Technologies",
-    value: "technologies",
+    label: "Technology",
+    value: "technology",
     options: technologies
   },
   {
     label: "Level of difficulty",
-    value: "experienceNeeded",
+    value: "experience_needed",
     options: lvlOfDifficulty
   },
   {
     label: "Hoster",
-    value: "hoster",
+    value: "is_github",
     options: hosters
   }
 ];

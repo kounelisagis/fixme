@@ -18,7 +18,7 @@ interface ITellUsAboutYou {
   readonly updateHoster: (hoster?: string) => any;
   readonly countIssues: (args: any) => any;
   readonly technology: string;
-  readonly experienceNeeded: string;
+  readonly experience_needed: string;
   readonly hoster: string;
   readonly issuesLength: number;
   readonly home: any;
@@ -92,7 +92,7 @@ class TellUsAboutYou extends React.Component<ITellUsAboutYou, {}> {
   public render() {
     const {
       technology,
-      experienceNeeded,
+      experience_needed,
       hoster,
       issuesLength,
       home
@@ -132,8 +132,8 @@ class TellUsAboutYou extends React.Component<ITellUsAboutYou, {}> {
                   options={lvlOfDifficulty}
                   defaultValue={lvlOfDifficulty.find(
                     lvl =>
-                      !!experienceNeeded &&
-                      experienceNeeded.includes(lvl.value)
+                      !!experience_needed &&
+                      experience_needed.includes(lvl.value)
                   )}
                   styles={customStyles(true)}
                   onChange={this.handleLvlChange}
@@ -161,7 +161,7 @@ const mapStateToProps = (state: IRootState) => {
   return {
     technology: state.home.technology,
     hoster: state.home.hoster,
-    experienceNeeded: state.home.experienceNeeded,
+    experience_needed: state.home.experience_needed,
     issuesLength: state.issues.issuesLength,
     home: state.home
   };

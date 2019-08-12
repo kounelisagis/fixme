@@ -5,10 +5,11 @@ export interface IProject {
   id: string;
   first_color: string;
   second_color: string;
+  setup_duration: string;
   logo: string;
   name: string;
   description: string;
-  languages: string;
+  languages: string[];
   tags: string[];
   issues_count: number;
   is_github: boolean;

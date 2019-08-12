@@ -8,7 +8,7 @@ export const IssueList = (props: any) => (
     <Datagrid>
       <TextField source="id" />
       <TextField source="title" />
-      <TextField source="experienceNeeded" />
+      <TextField source="experience_needed" />
       <TextField source="expected_time" />
       <TextField source="tech_stack" />
       <TextField source="url" />

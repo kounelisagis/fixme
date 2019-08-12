@@ -5,6 +5,7 @@
     "exclude": ["config/**/*.js", "node_modules/**/*.ts", "dist/**"]
   },
   "rules": {
+    "variable-name": [false, "check-format"],
     "ordered-imports": false,
     "object-literal-sort-keys": false
   },
@@ -12,6 +13,5 @@
     "ordered-imports": false,
     "object-literal-sort-keys": false
   },
-    "rulesDirectory": []
-
+  "rulesDirectory": []
 }
